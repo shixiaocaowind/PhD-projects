@@ -1,0 +1,303 @@
+\documentclass[twocolumn,prb,showpacs,10pt,superscriptaddress]{revtex4-1}
+%\documentclass[twocolumn,prb,showpacs,10pt]{article}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{subfig}
+\usepackage{rotating}
+\def\bra#1{\mathinner{\langle{#1}|}}
+\def\ket#1{\mathinner{|{#1}\rangle}}
+\def\braket#1{\mathinner{\langle{#1}\rangle}}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{float} %\floatstyle{boxed} \restylefloat{figure}
+\bibliographystyle{apsrev}
+\usepackage{fontenc}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[dvips]{hyperref}
+\usepackage[justification=centering]{caption}
+%\usepackage[utf8]{inputenc}
+%\usepackage{authblk}
+\usepackage{lipsum}
+\makeatletter
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+%\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+
+
+
+\begin{document}
+\title{A Density Functional Theory based study of Electron Transport Through Ferrocene Compounds with Different Anchor Groups in Different Adsorption Configurations of A STM-setup}
+\author{Xin Zhao}
+\affiliation{Institute for Theoretical Physics, TU Wien - Vienna University of Technology, Wiedner Hauptstrasse 8-10, A-1040 Vienna, Austria}
+\author{Robert Stadler}
+\email[Email:]{robert.stadler@tuwien.ac.at}
+\affiliation{Institute for Theoretical Physics, TU Wien - Vienna University of Technology, Wiedner Hauptstrasse 8-10, A-1040 Vienna, Austria}
+
+
+\begin{abstract}
+In our theoretical study where we combine a nonequilibrium Green's function (NEGF) approach with density functional theory (DFT) we investigate compounds containing a ferrocene moiety which is connected to i) thiol anchor groups on both sides in a para-connection, ii) a pyridyl anchor group on one side in a meta-connection and a thiol group on the other side in a para-connection, in both cases with acetylenic spacers in between the Ferrocene and the anchors.
+We predict possible single molecule junction geometries within a scanning tunneling microscopy (STM) setup
+where we find that the conductance trend for the set of conformations are intriguing in the sense that the conductance does not decrease while the junction length increases which we analyze and explain in terms of Fermi level alignment. We also find a pattern for the current-voltage (IV) curves within the linear-response regime for both molecules we study, where the conductance variation with the molecular configurations is surprisingly small.
+\end{abstract}
+
+\maketitle
+\subsection{Introduction}
+
+The field of molecular electronics has been active for more than 40 years since Aviram and Ratner originally proposed a single molecule as a device, namely a molecular rectifier ~\cite{A. Aviram_1974}. Since the mid 1990s experimental advances for the electronic characterization of molecular junctions \cite{Agrait 2003, Nitzan 2003, Xu 2003,D.M.Eigler_1991} helped to promote the  filed of molecular electronics.
+Single molecule electronics is a field which aims at maintaining a continuous rise in performance of digital devices even once the lower threshold for miniaturization faced by the semiconductor industry has been reached. Molecules can self-organize when adsorbed to electrodes, which is an essential advantage for overcoming technological difficulties. For making single-molecule junctions applicable as molecular devices, they need to be operable at room temperature. Experimentally, these ambient conditions can
+be achieved with an electrochemical scanning tunneling microscopy (E-STM) \cite{Tim 2006, Tim 2005, W. Haiss 2003, A. M. Ricci 2010}.
+In such experiments, the target molecules are adsorbed on the metal surface of the working electrode. When a STM tip is brought to the solution containing target molecules and withdrawn after that, in some cases the molecule is trapped by the tip and the contacted metal surface and thereby a junction is formed. During the approaching and withdrawing process different geometrical contacts can be accessed, which increases the difficulty for the quantitative description in theoretical simulations.  
+%The synthesis is done ~\cite{Tim 2013} while efforts for measurements of such ferrocene compounds are on the way, our theoretical work hence can be used as a predicting tool for the experimental results.
+For a theoretical description of electron-transport in a single molecule junction
+a non-equilibrium Green's function formalism (NEGF) ~\cite{keldysh} combined with density functional theory (DFT) is used.
+The simulations of molecular electron transport properties enables a clearer understanding of the conductance dependence on the molecular structures and help the design of logical gates ~\cite{R. Stadler 2004} and transistors ~\cite{Tim 2005} in single molecule electronics as well as the implementation of thermoelectric devices ~\cite{fano,lambert2}.
+\begin{figure}[h]
+    %\captionsetup[subfigure]{labelformat=empty}
+    \centering
+    \subfloat[]{%
+     \includegraphics[clip,width=0.7\columnwidth]{chemicalstru_s-FDT.png}%
+     }
+
+    \subfloat[]{%
+     \includegraphics[clip,width=0.6\columnwidth]{chemicalstru_s-FPT.png}%
+     }
+     \caption{\small a) s-FDT with thiol on each side; b) s-FPT one side with pyridyl and the other side thiol.}
+ \label{Fig.chemicalstru-sFXT}
+\end{figure}
+We investigate the electron transport properties of two type of molecular wires containing a ferrocene moiety with the same and different anchoring groups ~\cite{Tim 2013}, which are shown in Fig. ~\ref{Fig.chemicalstru-sFXT}. Here s-FDT is a short notation for 1,1'-bis(thiophenol-4-ethynyl)ferrocene with thiol groups on both ends of the molecule and s-FPT for 1-(3-pyridylethynyl)-1'-(thiophenol-4-ethynyl)ferrocene where one of the anchor groups is substituted by pyridyl.
+The special characteristics of these molecules here are: i) the ferrocene moiety can be oxidized and therefore enables switching between two redox states, which can be operated via gating ~\cite{Tim 2006}, ii) the molecular backbone is the same for both cases while the different conductance behavior for the two type of molecules due to the difference in anchoring groups is a focus in our study. Where both pyridyl ~\cite{wong,pyridil1,pyridil2,pyridil3,pyridil4} and thiolate ~\cite{Kim 2006, Beebe 2002, Liang 2011} are popular choice for anchors in the single molecule electronics community. In our molecular design the acetylenic spacers are added to increase the molecule distance between the two electrodes for the prevention of through-vacuum tunneling and for the separation of the redox-active centers from the leads. %The pyridyl anchor group is chosen because they can provide the
+%best junction formation and conductance properties in recent experimental \cite{wong} and theoretical \cite{pyridil1,pyridil2,pyridil3,pyridil4} studies. They also providepeaks in the transmission function, which are narrow enough to assume that a charge on the complex has an impact on the conductance but not narrow enough for Coulomb blockade, Thiolate type anchor groups on the other hand are also popular because they have been found to reduce contact resistance ~\cite{Kim 2006, Beebe 2002, Liang 2011}, and they provide broad peaks compared with pyridyl anchor groups due to the stronger couplings to the electrodes. 
+
+The paper is organized as follows: In Sec. ~\ref{paper4:junction-geos} we present possible configurations for the junction. In Sec. ~\ref{sec:Computational_details} we present the computational details for obtaining the results. In Sec. ~\ref{paper4:lenth-dependence} we find a pattern for the conductance formation where for each molecule there is a set of higher conductance values and a single lower value. In our calculations the lower value is obtained form a linear junction geometry and the higher ones correspond to bended configurations. The conductance for the bended configurations increases with an increase in length for s-FDT and oscillates for s-FPT, which is counter intuitive in the coherent electron transport regime. 
+In Sec.~\ref{paper4:analysis} we analyze this trend in terms of Fermi level alignment and we conclude with a brief summary of our results in Sec.~\ref{paper4:summary}.
+
+\subsection{Geometry Adoption/Choice of geometries}\label{paper4:junction-geos}
+
+Measurements in a E-STM setup are operated under ambient conditions,where thiolates are likely to be saturated with hydrogen atoms even if for their adsorption on a metal surface as salts.
+%Another aspect for us to consider the anchoring groups thiolates are saturated with hydrogen atoms and form the thiol-Au bond instead of dissociating hydrogen atoms when adsorbed to gold electrodes is that the thiol-Au structure is energetically preferable than thiolate-Au type as the literature ~\cite{A.J.R. Silva}, ~\cite{S.Sanvito1} pointed out, DFT calculations also proved that  ~\cite{J.Nara}, ~\cite{H. Guo} recently. Hence it is rational to use the thiol-Au bond in our simulations.
+Since it has also been shown that the dissociation of hydrogen from a thiol group thereby forming a thiolate is not energetically favorable during the adsorption of this anchor on a gold surface ~\cite{A.J.R. Silva, S.Sanvito1, J.Nara, H. Guo}, we keep the hydrogen bonded to the sulfur in all calculations presented om this work.
+
+During the approaching and withdrawing process of the tip in E-STM experiments, different geometries for the established molecular contact can occur even if there is only one type of molecule in the solution. In principle, one could imagine three possible sources for the variation of the conductance in dependence of the junction structure for any particular molecule: i) inner (e.g. conformational) degrees of freedom for the molecular structure, ii) variations in the surface or tip structure occurring during the repeated measurement process or iii) differences in the adsorption geometry of the molecules in the junction. While variations in the surface structure of the working electrode itself are likely to occur while conductance data is recorded, there is no indication that such gradual variations would result in distinct peaks in histograms. The inner degrees of freedom of the molecule itself, most notably the rotational angle related to the two anchor groups attached to the Ferrocene (Fc) moiety, on the other hand cannot be identified with distinct local minima in the corresponding total energies where the two cyclopenta-dienyl (Cp) rings are known to rotate quite freely with energy barriers of only a few kJ/mol. So we assume that the defining element for the likelihood of particular junction geometries to be formed lies in the commensurability of the rotation angle between the anchor groups of the molecule with the sequence of potential on-top gold positions defined by the fcc (111) surface structure. This selection criterion leaves only few potential adsorption geometries for both s-FDT and s-FPT, where one is linear in the sense that one of the anchor groups is attached to the surface and the other one to the tip, while for the others both anchor groups bond to the surface but the rotation angle varies within the lower limit of being zero and the upper limit of the Fc moiety touching the surface, where the Fc is contacted directly by the tip in this setup. A range of potential junction geometries are shown in Fig. ~\ref{Fig:geo}.
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\linewidth,angle=0]{Tim_mol_junction_geometry-page001.eps}
+\caption{\small Junction geometries for a) s-FDT  and b) s-FPT with different rotation angles.\label{Fig:geo}}
+\end{center}
+\end{figure}
+In this section we provide further details on the step-wise structure optimization process we adopted for the definition of all the relevant degrees of freedom including the distances between the respective molecules and the tip and surface.
+For the linear structures with one anchor group attached to the substrate and the other one to the tip, we assumed a rotation angle of 180 \textdegree and the sulfur or nitrogen atom of the contact site on the molecule to be adsorbed on top of a respective gold position. For the structures with both anchor groups adsorbed on the surface and the tip directly contacting the Fc- moiety, the rotation angle was defined by the criterion that the sulfur or nitrogen contact atoms of both anchor groups needed to be on-top of two gold atoms of the surface, without the Fc moiety touching the surface. This criterion gives two types of potential Au contact positions, i.e. the anchoring atoms are either adsorbed to the same fcc sublattice or different sublattices as shown in Fig. ~\ref{Fig.bendedsublattice}, where the number of Au atoms in between the two contacted sites are 
+zero (Fig. ~\ref{Fig.bendedsublattice} a),d)), one (Fig. ~\ref{Fig.bendedsublattice} b),e)) or two (Fig. ~\ref{Fig.bendedsublattice} c),f)) on a line.
+\begin{figure*}
+\begin{center}
+\includegraphics[width=1.\linewidth,angle=0]{sFxT-sublattice-bended-page001.eps}
+\caption{\small Adsorption geometries for same sublattice adsorption (left) and different sublattice adsorption (right) for the molecules s-FDT (a-c) and s-FPT (d-f), where the distances d(Au-S) between the respective sulfur and gold sites resulting from on-top adsorption of both anchor groups are a) 3.32 (left), 3.32 (right), b) 3.17 (left), 3.17 (right), c) 3.18 (left), 3.18 (right)  \AA{} for s-FDT, while for the asymmetric s-FPT d(Au-S)/d(Au-N) were found to be d) 3.30/2.76 (left),  3.11/3.14 (right), e) 3.60/3.01 (left), 3.70/3.13 (right), f) 3.55/2.74 (left), 3.55/2.85 (right) \AA{} by our optimization procedure as described in our main text. The contacted gold positions on the surface for each adsorption geometry are marked in white, while the Au atoms on the same fcc sublattice in between these positions are marked in black for geometries with both anchors adsorbed on the same sublattice.}\label{Fig.bendedsublattice}
+\end{center}
+\end{figure*}
+\begin{figure}
+\begin{center}
+\includegraphics[width=\linewidth,angle=0]{Tim_mol_geometries_IV_page001.eps}
+\caption{\small The selected junction geometries for a) s-FDT with a rotation angle of 0\textdegree (black),  54\textdegree (green), 89 \textdegree (cyan), 125 \textdegree (blue) and 180\textdegree (red); b) s-FPT with a rotation angle of 0\textdegree (black), 50\textdegree (blue), 92\textdegree (cyan), 117\textdegree (green) and 180\textdegree (red), the resulting conductance in dependence on the voltage from DFT calculations with (middle panels) and without (right panels) SO corrections, where dots in each panel represent the anchoring sites of molecules adsorbed on the same sublattice on the surface, and squares represent anchoring sites on different sublattices.\label{Fig:IV}}
+\end{center}
+\end{figure}
+For obtaining stable junction geometries from the NEGF-DFT calculations, we i) relaxed all nuclear positions on the molecules in a linear conformation by means of total energy minimization, ii) adjusted the rotation angle between anchor groups manually so that it fit the commensurability requirement with the surface illustrated in Fig. ~\ref{Fig.bendedsublattice}, iii) relaxed all nuclear positions on the molecule again, and then iv) optimized the distances between the respective contact atoms on the electrodes and on the molecules. This distance optimization resulted in d$_{Au-Fe}$ = 4.45 \AA{} for the contact of the Fc moiety to the lowest atom on the tip for all adsorption geometries depicted in Fig. ~\ref{Fig:geo}, while d$_{Au-S}$ and d$_{Au-N}$ for the respective contacts of the anchor groups to the substrate varied more widely for each configuration and the values we obtained are explicitly given in the caption of Fig. ~\ref{Fig.bendedsublattice}. The respective linear adsorption geometries for both molecules have one anchor group contacting the substrate with d$_{Au-S}$ $=$ 3.08 \AA{} for s-FDT and 3.12 \AA{} for s-FPT, and the other anchor group contacting the tip with d$_{Au-S}$ $=$ 2.61 \AA{} for s-FDT and d$_{Au-N}$ $=$ 2.21 \AA{} for s-FPT.
+
+\subsection{Theoretical/Computational methods}\label{sec:Computational_details}
+
+We performed DFT- calculations with a PBE XC-functional within a NEGF framework ~\cite{M.Brandbyge 2002, Y.Xue 2002, A.R.Rocha 2005} using the GPAW code ~\cite{J.Mortensen 2005, J.Enkovaara 2010} to compute transmission probabilities $\mathcal{T}(E)$. In order to account for self-interaction errors and image charge effects present in DFT with local XC-functionals we applied a scissor operator (SO) correction according to Quek et al. ~\cite{Quek et al}. 
+This ad hoc correction is only applicable for rather weakly coupled molecules, a condition which is fulfilled for dithiols but not dithiolates adsorbed on gold surfaces ~\cite{A. deMeloSouza 2014}. In Ref.~\cite{A. deMeloSouza 2014} it was demonstrated that the dissociative adsorption of dithiols on Au substrates is energetically highly unfavourable and that for adsorbed dithiols a good agreement with experimental data for the conductance can be achieved when the values calculated from NEGF-DFT are corrected with a SO approach ~\cite{K.S.Thygesen}, where we describe the latter also in Appendix ~\ref{Appe1}. 
+All DFT calculations were carried out without treating spin polarization as a degree of freedom because previous studies on similar Ferrocene complexes ~\cite{Xin2017} revealed the low spin configuration to be the ground state. 
+The I-V curves we simulated for the geometries of each molecule (as shown in Fig. ~\ref{Fig:geo}) are obtained from the transmission functions $\mathcal{T}(E)$ in a rigid band approximation where the bias dependence of $\mathcal{T}(E)$ is disregarded. This means that the current is determined within the linear response regime as the following integration over the zero bias transmission function,
+\begin{equation}
+%\begin{align}
+ I(V) = (2e/h)\int_{-\infty}^{\infty} \mathcal{T}(E)[f_{L}(E)-f_{R}(E)]dE \\
+ = G_{0}\int_{-V/2}^{V/2}\mathcal{T}(E)dE
+ \label{I(V)}
+\end{equation}
+%\end{align}
+where $f_{L,R}(E)$ is the Fermi Dirac function of the left and right electrode, respectively. 
+%\begin{equation}
+%\[ f_{L,R}(E) = \dfrac{{1}}{exp(E-\mu)/kT + 1} \]
+% \end{equation}
+%where $T$ is the room temperature, $\mu$ here is the chemical potential V/2, $k$ is the Boltzmann constant.
+%The simulated voltage (V) is from -0.6 to 0.6 eV, we integrate the $\mathcal{T}(E)$ around the Fermi level (-0.2 - 0.2 eV, the energy window) for each voltage, 
+and the conductance is simply calculated as,
+\begin{equation}
+ G(V)= I(V)/V
+ \label{G(V)}
+\end{equation}
+for each voltage.
+
+\subsection{Voltage and structure dependence of the conductance}\label{paper4:lenth-dependence}
+
+In Fig. ~\ref{Fig:IV} we show the voltage dependence of the conductance for all junction structures for both s-FDT and s-FPT, where we can identify the following trends: i) the quantitative values for both molecules are rather similar, and there is a pattern for each case with a set of higher conductance values and a single lower value, where in our calculations the lower value corresponds to the linear junction geometry and the set of higher ones to the bended configurations, i.e adsorption structures with both anchor groups attached to the substrate, the conductance varies only within a range of two orders of magnitude for the bended structures of both molecules; ii) the conductance for all bended configurations increases with an increase in length for s-FDT and oscillates for s-FPT, which is counter intuitive for the coherent electron transport regime where the tunnel current is expected to increase with a decrease of the junction length; iii) the conductance dependence on the voltage (V) is not very significant, i.e. the conductance does not change as much with V as it would be expected even under the rigid approximation we make by neglecting the influence of V on $\mathcal{T}(E)$.
+\begin{figure*}
+ \begin{center}
+\includegraphics[width=\linewidth,angle=0]{angle_d_G0-page001.eps}
+\caption{\small Zero-bias conductance for a selected range of structures as calculated from $\mathcal{T}(E_{F})$ with NEGF-DFT a),c) without and b),d) with SO corrections in dependence on a),b) the rotation angle between anchor groups and c),d) the junction length defined as the distance between the surface plane of the substrate and the contact Au atom on the tip.\label{Fig.conductance_vs_angle}}
+\end{center}
+\end{figure*}
+
+We calculate the conductance as I(V)/V according to Eqn. ~\ref{I(V)} and ~\ref{G(V)}, which means that I(V) is a linear function with a slope of roughly one in the voltage range considered where the conductance varies only little with the voltage, i.e. the increase of the bias window in our scheme.
+In Fig. ~\ref{Fig.conductance_vs_angle} we selected the linear conformation and some bended configurations with both anchor groups bonded to Au atoms with the same fcc sublattice and focus on exploring the reason behind the observed conductance trend.
+We plot the zero bias conductance we obtain directly in $\mathcal{T}(E_{F})$ from the NEGF-DFT calculations in dependence on the rotation angle between the anchor groups attached to the Fc moiety as well as on the junction length which we define as the distance between the surface plane of the substrate and the position of the tip atom contacting the molecule from above. While usually the conductance decreases with the junction length for electron transport in the coherent tunneling regime, we find for the conductance without SO corrections that it even increases in our calculations for s-FDT and oscillates for s-FPT when both anchor groups are attached to the substrate as shown in Fig.~\ref{Fig.conductance_vs_angle}. The SO correction opens up the HOMO-LUMO gap for all geometries, thereby reducing the conductance values quite substantially but it should not change the fundamental reasons for the conductance trend that we observe in Fig. ~\ref{Fig:IV}. We calculate conductance (G) dependent of Voltage (V) as I(V)/V, this just means that I(V) is a linear function with a slope of roughly one in the voltage range considered since the conductance varies only little with the voltage. The conductance without SO corrections directly correlates with the energetic positions of the HOMO $\varepsilon_{HOMO}$ (Fig. ~\ref{Fig.tf_noSO}), which is defined by a delicate angle dependent Fermi level alignment, where both the component of the molecular dipole moment in the transport direction and differences in zero bias charge transfer play decisive roles as we will demonstrate in detailed analysis of the structure dependent interplay of the two effects is provided in section ~\ref{paper4:analysis}.
+\begin{figure*}
+\begin{center}
+\includegraphics[width=\linewidth,angle=0]{MOlevel_sub_tf_with_wo_SO-page001.eps}
+\caption{\small Eigenenergies of the HOMO and LUMO from a subdiagonalization of the molecular part of  the transport Hamiltonian for the junction setups in Fig. ~\ref{Fig.conductance_vs_angle} (a) left panels), transmission functions $\mathcal{T}(E)$ without ((a) right panels) and with SO corrections (panel b)), where the upper panels are for s-FDT and the lower panels for s-FPT. The colors attributed to the respective four junction geometries are the same as those chosen for Fig. ~\label{Fig:HOMOandtf}.
+\label{Fig.tf_noSO}}
+\end{center}
+\end{figure*} 
+
+\subsection{Analysis of the Dependence of the Conductance on the Junction Length in Terms of Fermi Level Alignment}\label{paper4:analysis}
+   
+The SO correction should not change the trend of the conductance dependence of the junction length, therefore in the following we focus on the NEGF-DFT calculations without SO corrections where in Fig. ~\ref{Fig.conductance_dependence} a) we provide the structures on a smaller molecular length range when compared with Fig. ~\ref{Fig.conductance_vs_angle} c) because here the physical effects determining the conductance can be distinguished unambiguously. The energetic positions of the HOMO in Fig. ~\ref{Fig:HOMOandtf} as obtained from a diagonalization of the subspace of the molecular region of the transport Hamiltonian show that the closer $\varepsilon_{HOMO}$ is to the Fermi Level E$_{F}$, the higher the conductance becomes. The only exception from that trend is the slightly tilted cis-configuration of s-FPT where a distinctly broadened peak in the corresponding transmission function (Fig. ~\ref{Fig.tf_noSO} a), black curve) indicates an overall increased electron coupling of the HOMO to the leads in this particular configuration.
+\begin{figure*}
+\begin{center}
+\includegraphics[width=\linewidth,angle=0]{SIfigure2-page001.eps}
+\caption{\small Junction length dependence of a) the conductance without SO corrections, b) the eigenenergy of the HOMO from a subdiagonalization of the molecular part of the transport Hamiltonian of the junction (solid) and Vacuum level alignment (dotted), where for the latter shifted values taking into account the contribution from partial charging are also shown as crosses (Bader analysis) and triangles (integration over electron $\Delta$ n(z)), c) Electronegativities of the free molecules in dependence on the rotation angle and d) partial charges on the molecules in the junction from a Bader analysis (crosses) as well as from integration over $\Delta$ n(z) in the molecular region (triangles) in units of electrons. For all panels symbols and lines are shown in black for s-FPT and in red for s-FDT.\label{Fig.conductance_dependence}}
+\end{center}
+\end{figure*}
+This means that any analysis of the conductance trends must focus on the sources of Fermi level alignment (FLA) of MOs obtained from a subdiagonalization in general and the HOMO in particular.
+These sources can be divided into properties of the separate components of the junction and the charge rearrangement when these components are combined to form the junction. The former consist mostly of the permanent dipole of the free molecule in the transport direction which has a strong dependence on the contact angle but also the dipole moment of the metallic slab which is caused by the asymmetry that arises from the fact that there is a tip on one side but a surface substrate on the other and the variation of the vacuum level positioning with the length of the gap between tip and substrate. These effects result in the dotted lines in Fig. ~\ref{Fig.conductance_dependence} b), which were obtained from vacuum level alignment from independent DFT calculations for the free molecule and the metal slabs without the molecule, where the vacuum level is calculated as the electrostatic potential in the vacuum region for both separate systems and the HOMO of the molecule and E$_{F}$ of the metal slab  put in reference to this vacuum level are assumed to be the same for both when the junction is formed, for the details of this procedure we refer to Appendix ~\ref{Appe2}. The values for $\varepsilon_{HOMO}$ obtained from this procedure are all substantially higher in energy than those obtained from the subdiagonalization of the transport Hamiltonian of the junction (solid line in Fig. ~\ref{Fig.conductance_dependence} b)) but show very similar qualitative trends for s-FPT (black lines) and somewhat different behavior for s-FDT (red lines). 
+These differences are due to the neglect so far of the effect of charge rearrangements when the components of the junction are brought together. There are different views in the literature of how best to describe this effect, where some authors prefer a description in terms of interface or bonding dipoles ~\cite{Verwüste 2015} and one of us has written a series of papers where they are discussed in terms of partial charges on the molecule ~\cite{Stadler 2006, Stadler 2007, Stadler 2010, Kastlunger 2013}. Both views agree in attributing the charge rearrangement at the interface to Pauli repulsion, but while the interface dipole approach does not allow for a quantitative analysis of the resulting energy shifts of MOs ~\cite{Verwüste 2015}, these can be reproduced to a high level of accuracy from vacuum level aligned eigenenergies from free molecule calculations where the partial charge the molecule also has in the junction because of its interaction with the leads is added ~\cite{Stadler 2006, Stadler 2007, Stadler 2010, Kastlunger 2013}. 
+This is because in case of a positive charge the remaining electrons are bound more tightly to the respective nuclei in the molecule leading to more negative MO eigenenergies, in case of a negative charge the opposite behavior with a rise in MO energies is encountered ~\cite{Stadler 2006}. For such a description it is not relevant whether the partial charge comes from the emptying or filling of a molecular level or from Pauli repulsion effects at the interface, where a clear distinction of both in any case is not rigorously possible in the junction setup where the MOs and the surface states of the leads form hybrid orbitals. The only source of accuracy in this partial charge perspective is the definition of this charge in its technical practicality, where the various options, such as a Mulliken analysis ~\cite{Mulliken 1955}, a Bader analysis ~\cite{bader} or an integration over $\Delta$n(z), i.e. the difference of the electron density between the junction and its two components in the transport direction and averaged over the surface plane in the molecular region \cite{Stadler 2006, Stadler 2007}. 
+Since we are interested in the electrostatic effect of the charge on the MOs, a Mulliken analysis where electrons are attributed to atoms in terms of the LCAO basis sets is not a good option. The Bader analysis which uses zero flux surfaces to divide atoms or the integration over $\Delta$n(z) where the borders on $z$ for the definition of the molecular region are put at the mid-point between the $z$-coordinates of the molecular and metallic contact atoms provide much more useful molecular partial charge values $\Delta$N for this purpose.
+In Fig. ~\ref{Fig.conductance_dependence} c) we plot the electronegativities EN of the free molecules according to Mulliken's definition of EN = (IP+EA)/2 ~\cite{Mulliken 1955} where the ionization potential IP and the electron affinities EA have been calculated from DFT total energies of charged and neutral molecules as IP=E(N-1)-E(N) and EA = E(N)-E(N+1), respectively, where N is the number of electrons in the neutral molecules. The junction length dependence of EN in Fig. ~\ref{Fig.conductance_dependence} c) corresponds qualitatively with that of the molecular partial charges $\Delta$N in Fig. ~\ref{Fig.conductance_dependence} d), which were obtained from a Bader Analysis (crosses) and by integrating over $\Delta$n(z) (triangles), where stronger negative values mean that larger fractions of an electron have been subtracted from the molecule due to the formation of the junction. 
+These values of $\Delta$N, where the results from the Bader analysis and from the integration disagree quantitatively in the sense that the Bader charges are smaller, have also been used for the vacuum level alignment with partially charged molecules in Fig. ~\ref{Fig.conductance_dependence} b), where the Bader shifted energies seem to show better agreement with $\varepsilon_{HOMO}$ obtained from a subdiagonalization of the transport Hamiltonian of the junctions. For s-FPT both EN and $\Delta$N follow the same trend as the vacuum level aligned $\varepsilon_{HOMO}$ without the consideration of partial charges, while for s-FDT the second point whose value is the lowest one in the vacuum level alignment of the neutral molecules has the highest value in EN and $\Delta$ N, thereby flattening the qualitative trends in the length dependence of the final $\varepsilon_{HOMO}$ Fig. ~\ref{Fig.conductance_dependence} b) and the conductance in Fig. ~\ref{Fig.conductance_dependence} a).
+
+Because the values for $\varepsilon_{HOMO}$ in Fig. ~\ref{Fig.conductance_dependence} b) are quite close to E$_{F}$, the question arises whether Fermi level pinning plays a role, i.e. whether the energetic distance of $\varepsilon_{HOMO}$ to E$_{F}$ can be tuned by variations in EN or will be pinned at the electrodes Fermi level regardless of EN. In Ref. ~\cite{Van Dyck 2014} a test for the occurrence or absence of Fermi level pinning was proposed by conducting cluster calculations, where the respective molecule is just attached to single gold atoms at each contact point with electrodes. For the molecules in our study this would mean that the linear structures where one anchor group is bonded to the surface and one to the tip there would be two gold atoms in the cluster calculations, namely one at each anchor group, while the junction geometries with both anchors adsorbed on the surface would in addition have a third gold atom, where the Fc moiety is contacted by the tip.
+In Ref. ~\cite{Van Dyck 2014} it was proposed that when the HOMO is a metal-induced gap state (MIG) in these cluster calculations, i.e. it is mostly localized on the gold atoms, any Fermi level pinning effect is annihilated and the energetic position of the HOMO level is determined by the respective electronegativity of the molecule. 
+\begin{figure}
+\begin{center}
+\includegraphics[width=\linewidth,angle=0]{MIGS-page001.eps}
+\caption{\small Localization patterns for the HOMO from cluster calculations containing the free molecule and the two or three Au contact atoms defined by the respective junction geometries for a) s-FDT  and b) s-FPT.\label{Fig.MIGSorb}}
+\end{center}
+\end{figure}
+In Fig.~\ref{Fig.MIGSorb} we plot the HOMOs from cluster calculations for the junction geometries discussed in Fig. ~\ref{Fig.conductance_vs_angle}, ~\ref{Fig:HOMOandtf} and ~\ref{Fig.conductance_dependence}. Since for all cases the HOMO has MIG character, Fermi level pinning can be disregarded as a factor in the observed FLA trends.
+
+In Ref. ~\cite{Verwüste 2015}, where the coverage dependence of FLA for biphenyl-dithiolate monolayers on Au(111) was studied, it was found that the tilt-angle dependence of Pauli repulsion at the interface played a crucial role. In order to investigate whether this is also the case for our molecules we plot the electron density difference $\Delta$ n(z) between the density of the junction and of its compounds in the transport direction and the running integral over its molecular part for the junction geometries of Fig. ~\ref{Fig.conductance_dependence} in Fig. ~\ref{Fig.deltaN}, where no big differences between these functions for different rotation angles can be identified at the interfaces. This finding further confirms the conclusions from the FLA analysis we presented so far, namely that the level alignment determining the conductance trends in dependence on rotation angle (or junction length) in our article does not rely on interface effects but is defined by the accumulative effects of the respective molecular dipole moments and the partial charging driven by the respective molecular electronegativities, which result in the observed energetic positions of the HOMO in the junction.
+\begin{figure*}
+\begin{center}
+\includegraphics[width=\linewidth,angle=0]{deltaN-stru-page001.eps}
+\caption{\small Electron density difference $\Delta$ n(z) between the junctions density and that of its two components(black lines), where the functions attributed to the molecular region are highlighted in green and the running integral over this molecular part is plotted in red for a) s-FDT and b) s-FPT.
+ \label{Fig.deltaN}} 
+\end{center}
+\end{figure*}
+\subsection{Summary}\label{paper4:summary}
+
+In this study we investigated the potential use of molecular wires containing ferrocene centers with the same and different anchoring groups on each side. We found that the conductance of the proposed set of configurations for molecules s-FDT and s-FPT formed in the junction with two anchoring atoms absorbed to the surface vary in general only within a rather small region in dependence on the rotation angles or type of molecule. The counter intuitive phenomenon that the conductance does not increase while the junction length decreases is explained by Fermi level alignment where we found that the HOMO position for the bended configurations is close to the Fermi level and dominates the conductance.  
+
+We found that for the two types of molecule the set of conductance have similar values and patterns, which is that the conductance from junctions where molecules are adsorbed with both anchoring sites on the surface have higher conductance values (10$^{-4}$ \texttwelveudash 10$^{-5}$) while a significantly lower conductance value ($\sim$ 10$^{-7}$) is found for the junction geometry formed by a molecule bonded to the tip with one anchor and to the substrate with the other.  
+Our study allows experimentalists to relate their measurement data on similar systems to the relative abundance of potential junction geometries. 
+
+\section{Appendix \rom{1}}\label{Appe1}
+\subparagraph{Scissor Operator corrections}\label{SO correction}
+In order to compare the conductance with experimental results, we need to account for self-interaction errors and image charge effects in DFT calculations with semi-local XC-functionals. We applied a so-called scissor operator (SO) correction according Quek et al ~\cite{Quek et al}, which in effect widens the single particle HOMO-LUMO gap and accounts for many body contributions in a very approximative way.
+For a molecule adsorbed to the metal surface, SO is defined as $\Sigma_{0}-\Delta\Sigma_{0}$, where $\Sigma_{0}$ is calculated for the highest occupied molecular orbital (HOMO) as,
+\begin{equation}
+ \Sigma_{0}^{o} = -(\varepsilon_{HOMO}+IP).
+\end{equation}
+where $IP$ and $\varepsilon_{HOMO}$ are the first ionization energy and the HOMO energy with respect to the vacuum potential for the isolated molecule. $IP$ is defined as $IP = E(N-1) - E(N)$ where E(N-1) and E(N) are the respective total energies for the molecule with one positive charge and the neutral case.
+For the lowest unoccupied MO (LUMO) $\Sigma_{0}^{u}$ is calculated as,
+\begin{equation}
+ \Sigma_{0}^{u} = -(\varepsilon_{LUMO}+EA).
+\end{equation}
+where $EA$ is the electron affinity of the isolated molecule, it is calculated as $EA = E(N) - E(N+1)$
+
+The image charge contribution $\Delta\Sigma_{0}$ accounting for screening of the charge by the metal surface, we calculate following the recipe by Thygesen et al ~\cite{K.S.Thygesen}. This part actually corrects for the polarization of the molecular subsystem and the metal electrodes, and moves the shifted occupied/unoccupied states slightly closer to the Fermi level again, thereby we diminishing the original effect of $\Sigma_{0}$. The molecular states obtained by a subdiagonalization of the transport Hamiltonian are then adjusted by $\Sigma_{0}^{o} - \Delta\Sigma_{0}^{o}$ for all occupied states and $\Sigma_{0}^{u} - \Delta\Sigma_{0}^{u}$ for all unoccupied states.
+In this way the molecular HOMO-LUMO gap is enlarged by pushing occupied states down and unoccupied states up in energy.
+
+\section{Appendix \rom{2}}\label{Appe2}
+\subparagraph{Vacuum Level Alignment}
+The alignment of the vacuum level is for defining the same energy reference for molecular eigenenergies and the Fermi level of metallic electrodes in order to relate the MOs to $E_{F}$ when both are obtained from separate DFT calculations for the two different compounds of the junction. 
+This can be done in the following way:
+i) In order to obtain the molecular eigenenergies with respect to the vacuum potential, a calculation of the isolated molecule in the same unit cell as the junction structure needs to be performed, where the obtained MOs energies are defined as:
+\begin{equation}
+\varepsilon_{i,vac} = \varepsilon_{i,DFT} - V_{mol,vac}
+\end{equation}
+where $\epsilon_{i,DFT}$ are the molecular eigenvalues from a DFT calculation with an arbitrary code -dependent definition of the energy reference. $V_{mol,vac}$ is obtained by averaging the potential within the vacuum area.
+
+ii) For the calculation of the metal Fermi energy relative to the vacuum potential, one needs to perform a DFT calculation of the metal electrodes without the molecule in the same unit cell as the junction structure. The vacuum potential can then
+be determined as the electrostatic potential from that calculation in the gap between the two surfaces.
+The Fermi level can now be determined relative to this vacuum level as,
+\begin{equation}
+\varepsilon_{F,vac} = \varepsilon_{F,DFT} - V_{F,vac}
+\end{equation}
+where again the energy reference for $\varepsilon_{F,DFT}$ can be arbitrary and in general code-dependent.
+
+iii) Now we align the MO eigenenergies to metal Fermi level by forming the difference, 
+\begin{equation}
+\epsilon_{i,F} = (\epsilon_{i,vac}) -(\varepsilon_{F,vac})
+\end{equation}
+%One of the  central issues in functional devices e.g. rectifier or switches is the alignment of the molecular electronic levels to the Fermi level of the electrodes attached to the molecule.There is a parameter $S$ used for characterizing the level alignment of molecular HOMO and Fermi level of electrodes when the chemical geometries (conjugated backbone) of molecules vary. 
+%\begin{equation}
+% S= |\delta((E_{f}-E_{HOMO})/(IP_{isolated}))|
+%\end{equation}
+%here the $E_{F}$ and $E_{HOMO}$ are Fermi level of electrodes and HOMO of the molecule in the junction, $IP_{isolated}$ is ionization potential of the isolated molecule, which corresponds to the HOMO level energy of the molecule before attached to the metal surface. In metal/semiconductor  and metal/organic systems, Fermi level pinning refers to the feature that when the molecule is adsorbed to the metal surface, the HOMO level alignment with respect to the Fermi level of the metal doesn't change, namely $(E_{F}-E_{HOMO})$ is small, which leads to the $S$ approaching zero. While in the not pinned cases $(E_{F}-E_{HOMO})$ compensate with the ionization potential of the isolated molecule, thus results in $S \approx 1$. For the molecules we study here the $S$ value is high ($\approx$ 0.7).
+%The origin of the Fermi level pinning effect can be attributed into intrinsic dipole (molecular dipole) and interface dipole which also involves charge distribution between molecule and metal surface, the latter is closely related to the Pauli repulsion due to the overlap of molecule and the surface. From the charge distribution we find that the molecules lose partial electron when they interact (absorbed to) with the electrode.    
+
+\begin{acknowledgments}
+Both authors have been supported by the Austrian Science Fund FWF (project number No. P27272). We are indebted to the Vienna Scientific Cluster VSC, whose computing facilities were used to perform all calculations presented in this paper (project No. 70671). We gratefully acknowledge helpful discussions with Tim Albrecht.  
+\end{acknowledgments}
+
+
+
+
+\bibliographystyle{apsrev}
+
+\bibliographystyle{apsrev}
+
+\begin{thebibliography}{}
+
+\bibitem{A. Aviram_1974}A. Aviram and M.A. Ratner, \textit{Chem. Phys. Lett.}, \textbf{29}, 277 (1974).
+\bibitem{Agrait 2003}N. Agra\"{\i}t, A.L. Yeyati and J.M. van Ruitenbeek, \textit{Phys. Rep.} \textbf{377}, 81 (2003).
+\bibitem{Nitzan 2003}A. Nitzan and M.A. Ratner, \textit{Science} \textbf{300}, 1384 (2003).
+\bibitem{Xu 2003}B. Xu and N.J. Tao, \textit{Science}  \textbf{301}, 1221 (2003).
+\bibitem{D.M.Eigler_1991}D.M. Eigler, C.P. Lutz and W.E. Rudge, \textit{Nature}, \textbf{352}, 600 (1991).
+\bibitem{Tim 2006}T. Albrecht, K. Moth-Poulsen, J.B. Christensen, A. Guckian, T. Bj\o{}, J.G. Vos, and J. Ulstrup, \textit{Faraday Discuss.} \textbf{131}, 265 (2006).
+\bibitem{Tim 2005}T. Albrecht, A. Guckian, J. Ulstrup, and J. G. Vos, \textit{Nano Lett.} \textbf{5}, 1451 (2005).
+\bibitem{W. Haiss 2003}W. Haiss, H. van Zalinge, S.J. Higgins, D. Bethell, H. H\"{o}benreich, D.J. Schiffrin, and R.J. Nichols, \textit{J. Am. Chem. Soc.} \textbf{125}, 15294 (2003).
+\bibitem{A. M. Ricci 2010}A.M. Ricci, E.J. Calvo, S. Martin, and R.J. Nichols, \textit{J. Am. Chem. Soc.} \textbf{132}, 2494 (2010).
+\bibitem{keldysh}Y. Meir and N. S. Wingreen, \textit{Phys. Rev. Lett.}, \textbf{68}, 2512 (1992).
+\bibitem{R. Stadler 2004}R. Stadler, S. Ami, M. Forshaw and C. Joachim, \textit{Nanotechnology}, \textbf{15}, S115 (2004).
+\bibitem{fano}R. Stadler and T. Markussen, \textit{J. Chem. Phys.} \textbf{135}, 154109 (2011).
+\bibitem{lambert2}C.M. Finch, V.M. Garcia-Suarez and C.J. Lambert, \textit{Phys. Rev. B} \textbf{79}, 033405 (2009).
+\bibitem{Tim 2013}M.S. Inkpen, T. Albrecht, and N.J. Long, \textit{Organometallics}, \textbf{32} 6053 (2013).
+\bibitem{wong}W. Hong, D.Z. Manrique, P. Moreno-Garc\'{\i}a, M. Gulcur, A. Mishchenko, C.J. Lambert, M.R. Bryce and T. Wandlowski, \textit{J. Am. Chem. Soc.} \textbf{134}, 2292 (2012).
+\bibitem{pyridil1}R. Stadler, K.S. Thygesen and K.W. Jacobsen, \textit{Phys. Rev. B} \textbf{72}, 241401(R) (2005).
+\bibitem{pyridil2}R. Stadler, \textit{J. Phys.: Conf. Ser.} \textbf{61}, 1097 (2007). 
+\bibitem{pyridil3}R. Stadler, \textit{Phys. Rev. B} \textbf{80}, 125401 (2009).
+\bibitem{pyridil4}G. Kastlunger and R. Stadler, \textit{Phys. Rev. B} \textbf{88}, 035418 (2013).
+\bibitem{Kim 2006}B.-S. Kim,J.M. Beebe, Y. Jun, X.-Y. Zhu and C.D.l Frisbie, \textit{J. Am. Chem. Soc.} \textbf{128}, 4970 (2006). 
+\bibitem{Beebe 2002}J.M. Beebe, V.B. Engelkes, L.L. Miller and C.D. Frisbie, \textit{J. Am. Chem. Soc.}  \textbf{124}, 11268–11269 (2002).
+\bibitem{Liang 2011}L. Luo, A. Benameur, P. Brignou, S.H. Choi, S. Rigaut and C.D. Frisbie, \textit{J. Phys. Chem. C} \textbf{115}, 19955 (2011).
+\bibitem{A.J.R. Silva}R.B. Pontes, F.D. Novaes, A. Fazzio and A.J.R. Silva, \textit{J. Am. Chem. Soc.} \textbf{128}, 8996 (2006).
+\bibitem{S.Sanvito1}W.R. French, C.R. Iacovella, I. Rungger, A.M. Souza, S. Sanvito and P.T. Cummings, \textit{J. Phys. Chem. Lett.} \textbf{4}, 887 (2013).
+\bibitem{J.Nara}J. Nara, S. Higai, Y. Morikawa and T. Ohno, \textit{J. Chem. Phys.} \textbf{122}, 6705 (2004).
+\bibitem{H. Guo}Z. Ning, W. Ji and H. Guo, \textit{arXiv:cond-mat/arXiv:0907.4674} (2010).
+\bibitem{M.Brandbyge 2002}M. Brandbyge, J.-L. Mozos, J. Taylor, K. Stokbro, \textit{Phys. Rev. B} \textbf{65}, 165401 (2002).
+\bibitem{Y.Xue 2002}Y. Xue, S. Datta, M.A. Ratner, \textit{Chem. Phys.} \textbf{281}, 151 (2002).
+\bibitem{A.R.Rocha 2005} A.R. Rocha, V.M. Garcia-Suarez, S.W. Bailey, C.J. Lambert,J. Ferrer, S. Sanvito, \textit{Nat. Mater.} \textbf{4}, 335 (2005).
+\bibitem{J.Mortensen 2005}J.J. Mortensen,L. B. Hansen, K.W. Jacobsen, \textit{Phys. Rev. B} \textbf{71}, 035109 (2005).
+\bibitem{J.Enkovaara 2010}J. Enkovaara, C. Rostgaard, J.J. Mortensen,J. Chen, M. Dulak, L. Ferrighi, J. Gavnholt, C. Glinsvad, V. Haikola, H.A. Hansen, H. Kistoffersen, M. Kuisma, A.H. Larsen, L.J. Lehtovaara,  \textit{Phys.: Conf. Ser.} \textbf{22}, 253202 (2010).
+\bibitem{Quek et al}S.Y. Quek,J.B. Neaton, M.S. Hybertsen, L. Venkataraman, C.H. Choi, S.G. Louie,  \textit{Nano Lett.} \textbf{7}, 3477 (2007).
+\bibitem{A. deMeloSouza 2014} A. de Melo Souza, I. Rungger, R.B. Pontes, A.R. Rocha, A.J.R. da Silva, U. Schwingenschl\"{o}egl, S. Sanvito, \textit{Nanoscale} \textbf{6}, 14495 (2014).
+\bibitem{K.S.Thygesen}D.J. Mowbray, G. Jones and K.S. Thygesen, \textit{J. Chem. Phys.} \textbf{128}, 111103 (2008).
+\bibitem{Xin2017}X. Zhao, G. Kastlunger and R. Stadler, \textit{Phys. Rev. B} \textbf{96}, 085421 (2017).
+\bibitem{Verwüste 2015}E. Verwüster, O.T. Hofmann, D.A.Egger, E.J. Zojer, \textit{Phys. Chem. C}  \textbf{119}, 7817 (2015).
+\bibitem{Stadler 2006}R. Stadler, K.W. Jacobsen,  \textit{Phys. Rev. B} \textbf{74}, 161405 (R) (2006).
+\bibitem{Stadler 2007}R. Stadler, \textit{J. Phys.: Conf. Ser.} \textbf{61}, 1097 (2007).
+\bibitem{Stadler 2010}Stadler, R. \textit{Phys. Rev. B} \textbf{81}, 165429 (2010).
+\bibitem{Kastlunger 2013}G. Kastlunger, R. Stadler, \textit{Phys. Rev. B} \textbf{88}, 035418 (2013).
+\bibitem{Mulliken 1955}R. S. Mulliken, \textit{J. Chem. Phys.} \textbf{23}, 1833 (1955).
+\bibitem{bader}W. Tang, E. Sanville and G. Henkelman, \textit{J. Phys. Condens. Matter} \textbf{21}, 084204 (2009).
+\bibitem{Van Dyck 2014}C. Van Dyck, V. Geskin, J. Cornil, \textit{Adv. Funct. Mater.} \textbf{24}, 6154 (2014).
+
+
+\end{thebibliography}
+
+
+\end{document}
